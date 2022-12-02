@@ -1,17 +1,32 @@
+fun splitListOnEmpty(lst: List<Int?>): List<List<Int>> {
+    val ret: MutableList<List<Int>> = mutableListOf()
+    val sublist: MutableList<Int> = mutableListOf()
+    for (i in lst.indices) {
+        if (lst[i] == null) {
+            if (sublist.isNotEmpty()) ret.add(sublist.toList())
+            sublist.clear()
+            continue
+        }
+        sublist.add(lst[i]!!)
+    }
+    if (sublist.isNotEmpty()) ret.add(sublist.toList())
+    return ret
+}
+
+fun part1(nrs: List<List<Int>>) {
+    println(nrs.maxOfOrNull { it.sum() } ?: 0)
+}
+
+fun part2(nrs: List<List<Int>>) {
+    val mutNrs: MutableList<Int> = nrs.map { it.sum() }.toMutableList()
+    mutNrs.sort()
+    println(mutNrs.takeLast(3).sum())
+}
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
-
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    val listOfIntLists = splitListOnEmpty(readInput("01").map { it.toIntOrNull() })
+    println("part 1")
+    part1(listOfIntLists)
+    println("part 2")
+    part2(listOfIntLists)
 }
