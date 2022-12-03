@@ -12,7 +12,7 @@ enum class Outcome(val points: Int) {
     WIN(6)
 }
 
-fun toRps(letter: String) =
+private fun toRps(letter: String) =
     when (letter) {
         "A", "X" -> RPS.ROCK
         "B", "Y" -> RPS.PAPER
@@ -20,7 +20,7 @@ fun toRps(letter: String) =
         else -> throw Exception("unknown rps letter: $letter")
     }
 
-fun toOutcome(letter: String) =
+private fun toOutcome(letter: String) =
     when (letter) {
         "X" -> Outcome.LOSE
         "Y" -> Outcome.DRAW
@@ -28,7 +28,7 @@ fun toOutcome(letter: String) =
         else -> throw Exception("unknown outcome letter: $letter")
     }
 
-fun outcome1(input: Pair<RPS, RPS>) =
+private fun outcome1(input: Pair<RPS, RPS>) =
     when (input) {
         // I (right) win
         Pair(RPS.SCISSORS, RPS.ROCK) -> Outcome.WIN.points + RPS.ROCK.points
@@ -45,11 +45,11 @@ fun outcome1(input: Pair<RPS, RPS>) =
         else -> throw Exception("unknown input: $input")
     }
 
-fun part1(input: List<String>) {
+private fun part1(input: List<String>) {
     println(input.sumOf { outcome1(Pair(toRps(it.take(1)), toRps(it.takeLast(1)))) })
 }
 
-fun outcome2(input: Pair<RPS, Outcome>) =
+private fun outcome2(input: Pair<RPS, Outcome>) =
     when (input) {
         // losing
         // rock, mine is scissors
@@ -72,7 +72,7 @@ fun outcome2(input: Pair<RPS, Outcome>) =
         else -> throw Exception("unknown input: $input")
     }
 
-fun part2(input: List<String>) {
+private fun part2(input: List<String>) {
     println(input.sumOf { outcome2(Pair(toRps(it.take(1)), toOutcome(it.takeLast(1)))) })
 }
 

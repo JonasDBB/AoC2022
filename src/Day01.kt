@@ -1,4 +1,4 @@
-fun splitListOnEmpty(lst: List<Int?>): List<List<Int>> {
+private fun splitListOnEmpty(lst: List<Int?>): List<List<Int>> {
     val ret: MutableList<List<Int>> = mutableListOf()
     val sublist: MutableList<Int> = mutableListOf()
     for (i in lst.indices) {
@@ -13,11 +13,11 @@ fun splitListOnEmpty(lst: List<Int?>): List<List<Int>> {
     return ret
 }
 
-fun part1(nrs: List<List<Int>>) {
+private fun part1(nrs: List<List<Int>>) {
     println(nrs.maxOfOrNull { it.sum() } ?: 0)
 }
 
-fun part2(nrs: List<List<Int>>) {
+private fun part2(nrs: List<List<Int>>) {
     val mutNrs: MutableList<Int> = nrs.map { it.sum() }.toMutableList()
     mutNrs.sort()
     println(mutNrs.takeLast(3).sum())
